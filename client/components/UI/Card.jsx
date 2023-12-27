@@ -7,7 +7,7 @@ const Card = () => {
     const desc = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, cupiditate!"
     return (
         <main className=' m-10 rounded shadow overflow-hidden bg-white cursor-pointer border'>
-            <Image src={testImg} className='hover:scale-105 transition-all  duration-200 '/>
+            <Image src={testImg} alt="photo" className ='hover:scale-105 transition-all  duration-200 '/>
             <div className='flex flex-col gap-3 p-5'>
                 <h1 className='text-xl'>Modern Loft With Stunning View</h1>
                 <div className='flex items-start gap-1'>
