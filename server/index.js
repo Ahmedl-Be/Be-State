@@ -1,9 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-dotenv.config();
 import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
+dotenv.config();
+
 
 mongoose.connect(process.env.MONGOURL).then(()=>{
     console.log("Connected to DB")
@@ -19,3 +20,14 @@ app.listen(5000,()=>{
 
 app.use("/api/user",userRouter);
 app.use("/api/auth",authRouter);
+
+
+// Global error handler 
+app.use((error, req, res, next) => {
+    res.status(error.statusCode || 500).json({
+        status: error.statusText || "ERROR",
+        message: error.message,
+        code: error.statusCode || 500,
+        data: null
+    })
+})
