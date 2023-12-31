@@ -1,58 +1,16 @@
 "use client"
-import React, { useState ,useEffect} from 'react'
 import Link from 'next/link';
-import { useRouter } from 'next/navigation'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import {Notify} from "@/components/UI/Notify";
+import { useForm } from '@/hooks/useForm';
 
 const page = () => {
-    const router = useRouter()
-    const [formData, setFormData] = useState({ username: '', email: '', password: '' });
-    const [error, setError] = useState();
-    const [loading, setLoading] = useState(false);
-    const notify = () => toast(error);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({
-            ...formData,
-            [name]: value,
-        })
-    }
-
-    // trace the error changing
-    useEffect(() => {
-        if (error) {
-            notify();
-        }
-    }, [error]);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        notify()
-        try {
-            setLoading(true);
-            const res = await fetch('http://localhost:5000/api/auth/signup', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            })
-            const data = await res.json()
-            if (data.success === false) {
-                setError(data.message)
-                setLoading(false)
-                return
-            }
-            setLoading(false);
-            setError(null)
-            setFormData({username:'', email:'', password:''})
-            router.push('/signIn')
-            console.log(data)
-        } catch (error) {
-            setError(error)
-            setLoading(false)
-        }
-    }
+    const initialState = { username: '', email: '', password: '' };
+    const { formData, error, loading, handleChange, handleSubmit } = useForm(
+        initialState,
+        'signUp',
+        'Sign-in Successfully',
+        "/signIn"
+        );
 
     return (
         <div className='flex gap-6 flex-col items-center pt-32 h-screen bg-slate-200'>
@@ -81,7 +39,7 @@ const page = () => {
                 <span className='opacity-70'> Have an account? </span>
                 <Link href="/signIn" className='text-blue-600 hover:text-blue-800 cursor-pointer'>Sing In</Link>
             </div>
-            {error && <ToastContainer />}
+            {error && <Notify />}
         </div>
     )
 }
