@@ -11,10 +11,10 @@ const Card = () => {
             <div className='flex flex-col gap-3 p-5'>
                 <h1 className='text-xl'>Modern Loft With Stunning View</h1>
                 <div className='flex items-start gap-1'>
-                    <MdOutlineLocationOn className='text-blue-500'/>
+                    <MdOutlineLocationOn className='text-blue-400'/>
                     <p className='text-sm opacity-75'>101 Serene Shore Road, Willow Lake</p>
                 </div>
-                <p className='text-sm opacity-75'>{desc}</p>
+                <p className='text-sm opacity-75'>{desc.length > 100 ? desc.slice(0,70):desc}...</p>
                 <span className='font-bold text-lg'>$733,00</span>
                 <div className='flex gap-5'>
                     <span>2 Bed</span>

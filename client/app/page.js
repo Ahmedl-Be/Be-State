@@ -1,18 +1,15 @@
 import HeroBanner from "@/components/HeroBanner";
-import Card from "@/components/UI/Card";
 import Slider from "@/components/slider/Slider";
+import Categories from "@/components/Categories";
 
 export default function Home() {
   return (
     <main className="bg-slate-100">
       <HeroBanner />
       <Slider />
-      <div className="grid lg:grid-cols-3 grid-cols-1	">
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </div>
+      <Categories category={"Recent offers"}/>
+      <Categories category={"Recent places for rent"}/>
+      <Categories category={"Recent places for sale"}/>
     </main>
   )
 }

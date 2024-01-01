@@ -17,6 +17,7 @@ export const useForm = (initialState, endpoint, successMessage, DirectTo) => {
         });
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -25,6 +26,7 @@ export const useForm = (initialState, endpoint, successMessage, DirectTo) => {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),
+                credentials:'include'
             });
             const data = await res.json();
             if (data.success === false) {
@@ -37,6 +39,7 @@ export const useForm = (initialState, endpoint, successMessage, DirectTo) => {
             setFormData(initialState);
             showToast(successMessage, 'success');
             router.push(DirectTo);
+            console.log(data)
         } catch (error) {
             setError(error);
             setLoading(false);
