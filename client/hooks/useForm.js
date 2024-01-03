@@ -2,13 +2,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { showToast } from '@/components/UI/Notify';
+import {UseUserContext} from '@/services/state/user/userContext';
 
 export const useForm = (initialState, endpoint, successMessage, DirectTo) => {
     const router = useRouter();
     const [formData, setFormData] = useState(initialState);
     const [error, setError] = useState("something went Wrong!");
     const [loading, setLoading] = useState(false);
-
+    const {user,setUserInfo} = UseUserContext()
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -16,8 +17,7 @@ export const useForm = (initialState, endpoint, successMessage, DirectTo) => {
             [name]: value,
         });
     };
-
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -34,12 +34,13 @@ export const useForm = (initialState, endpoint, successMessage, DirectTo) => {
                 setLoading(false);
                 return;
             }
+            setUserInfo(data)
+            console.log(user)
             setLoading(false);
             setError(null);
             setFormData(initialState);
             showToast(successMessage, 'success');
             router.push(DirectTo);
-            console.log(data)
         } catch (error) {
             setError(error);
             setLoading(false);

@@ -9,8 +9,8 @@ const page = () => {
         initialState,
         'signIn',
         'Sign-Up Successfully',
-        "/"
-        );
+        "/",
+    );
 
     return (
         <div className='flex gap-6 flex-col items-center pt-32 h-screen bg-slate-200'>

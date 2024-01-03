@@ -19,7 +19,7 @@ const SearchForm = () => (
 );
 
 const MobileMenu = ({toggleNavbar}) => (
-    <nav className="bg-slate-200 shadow-xl absolute w-full h-[100vh]">
+    <nav className='bg-slate-200 shadow-xl absolute w-full h-[100vh] transition-opacity duration-300'>
         <form className="relative">
             <input type='text' placeholder="Search..." className="bg-gray-white w-full flex-1 rounded border border-gray-300 px-3 py-2 text-gray-800 placeholder-gray-400 outline-none ring-indigo-200 transition duration-100 focus:ring" />
             <button className="absolute bottom-0 right-0 h-full border border-l-0 border-gray-300 bg-gray-white rounded px-3 ">
@@ -46,7 +46,8 @@ const NavBar = () => {
         <nav className='sticky top-0 z-20'>
             <header className='bg-slate-200 shadow-md'>
                 <div className="flex justify-between items-center rounded-lg p-4 md:mx-20 mx-7">
-                    <Link href="/" className='flex items-center gap-1 md:text-2xl text-lg font-bold'>
+                    <Link href="/" onClick={()=>setIsOpened(false)} 
+                    className='flex items-center gap-1 md:text-2xl text-lg font-bold'>
                         <MdOutlineRealEstateAgent />
                         <span className='opacity-50'>Be</span>Estate
                     </Link>
